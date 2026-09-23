@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    // BUG 6: Form default action not prevented
+    // Form submission
     document.getElementById('form-expense').addEventListener('submit', async (e) => {
-        // e.preventDefault(); // BUG: intentionally missing!
+        e.preventDefault();
         
         const type = document.getElementById('exp-type').value;
         const walletId = document.getElementById('exp-wallet').value;
@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const category = document.getElementById('exp-category').value;
         
         try {
-            await api.request('/expenses', 'POST', { type, walletId, title, amount, category });
-            // This code likely won't run because the page reloads due to missing preventDefault
+            await api.request('/expenses', 'POST', { type, walletId, title, amount: Number(amount), category });
             modal.classList.add('hidden');
+            document.getElementById('form-expense').reset();
             loadDashboardData();
         } catch (error) {
             console.error(error);
@@ -138,9 +138,8 @@ function renderBudgets(budgets) {
         const div = document.createElement('div');
         div.className = 'budget-item';
         
-        // BUG 7: Math for progress bar percentage is inverted/wrong
-        // Should be (b.spentAmount / b.monthlyLimit) * 100
-        const percentage = (b.monthlyLimit / (b.spentAmount || 1)) * 100;
+        // Progress bar percentage calculation: (spent / limit) * 100
+        const percentage = ((b.spentAmount || 0) / (b.monthlyLimit || 1)) * 100;
         const boundedPercent = Math.min(Math.max(percentage, 0), 100);
 
         div.innerHTML = `

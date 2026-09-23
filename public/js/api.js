@@ -11,8 +11,7 @@ const api = {
     },
     
     logout() {
-        // BUG 8 (Frontend): The token is not removed from localStorage on logout.
-        // It should be: localStorage.removeItem('token');
+        localStorage.removeItem('token');
         window.location.href = 'index.html';
     },
 

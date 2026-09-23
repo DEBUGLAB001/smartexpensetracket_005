@@ -20,7 +20,7 @@
 
 ## 2. Debugging Challenge
 
-This repository contains **8 realistic logical bugs** reported by QA automation and beta testers. These issues involve HTTP specification compliance, arithmetic calculations, multi-tenant authorization, query filtering, string normalization, and client-side DOM event handling.
+This repository contains **5 realistic logical bugs** reported by QA automation and beta testers. These issues involve HTTP specification compliance, arithmetic calculations, multi-tenant authorization, query filtering, and string normalization.
 
 ### Bug 1 — Expense Deletion Status Code Bug
 - **User Symptom**: QA reports that when deleting an expense record via the API, the server responds with HTTP 200 OK containing an empty payload instead of the standardized HTTP 204 No Content status code.
@@ -42,27 +42,12 @@ This repository contains **8 realistic logical bugs** reported by QA automation 
 - **User Symptom**: QA reports that user registration allows duplicate accounts to be created if the same email address is supplied with differing letter casing (e.g., `user@example.com` vs `USER@example.com`).
 - **Module**: Identity & Authentication / Auth Service
 
-### Bug 6 — Transaction Form Page Reload Bug
-- **User Symptom**: Beta testers report that submitting the "Add Expense / Income" modal unexpectedly triggers a complete browser reload instead of performing an asynchronous AJAX submission, clearing input states abruptly.
-- **Module**: Web Dashboard / Modal Transaction Form
-
-### Bug 7 — Budget Progress Gauge Inversion Bug
-- **User Symptom**: Beta testers report that the budget progress bar displays a full 100% bar when zero dollars are spent and shrinks towards 0% as actual expenditures increase.
-- **Module**: Web Dashboard / Budget Visualization
-
-### Bug 8 — Session Token Invalidation Bug
-- **User Symptom**: QA reports that clicking the "Sign Out" button redirects to the login screen but leaves the JWT auth token stored in the browser's local storage, allowing unauthorized session resumption.
-- **Module**: Authentication Client / Session Manager
-
 ---
 
 ## 3. Expected Behavior After Fixes
-Once all 8 bugs are diagnosed and resolved:
+Once all 5 bugs are diagnosed and resolved:
 1. Deleting an expense via `DELETE /api/expenses/:id` returns an HTTP 204 No Content response.
 2. The remaining budget correctly deducts expenditure from the monthly limit (`limit - spent`).
 3. Wallet modification requests verify user ownership and reject unauthorized cross-user modifications with HTTP 403 Forbidden.
 4. Filtering expenses by month accurately extracts only transactions dated within the targeted month.
 5. Email uniqueness validation normalizes casing (case-insensitive) and rejects duplicate registrations with HTTP 409 Conflict.
-6. Submitting the expense form prevents default browser page reload and posts transaction data asynchronously.
-7. The budget progress meter accurately reflects the percentage of budget consumed (`(spent / limit) * 100`).
-8. Logging out thoroughly purges stored authentication tokens from browser storage before redirection.
