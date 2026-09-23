@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Expense Tracker | Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+    <div class="auth-container glass-panel fade-in">
+        <h1 class="gradient-text">Smart Expense Tracker</h1>
+        <p class="subtitle">Manage your finances with premium aesthetics.</p>
+        
+        <div class="tabs">
+            <button class="tab-btn active" id="tab-login">Login</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="form-login" class="auth-form active-form">
+            <p class="subtitle" style="margin-bottom: 1rem; color: var(--accent-2);">Use the seed credentials to login</p>
+            <div class="input-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" required value="test@example.com">
+            </div>
+            <div class="input-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" required value="password123">
+            </div>
+            <button type="submit" class="btn-primary glow-effect">Sign In</button>
+            <p id="login-error" class="error-msg"></p>
+        </form>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

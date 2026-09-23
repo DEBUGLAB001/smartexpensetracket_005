@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "710020e0576b51ac85fd97dc32cc7655",
+      "name": "Test User",
+      "email": "test@example.com",
+      "passwordHash": "$2b$10$E/06EdYxllH5BRTZJHUYiuT6TKN2nDQKRt8R.tQwcohlmTtrMFbFK",
+      "createdAt": "2026-09-23T10:29:07.031Z"
+    }
+  ],
+  "wallets": [],
+  "expenses": [],
+  "categories": [
+    "Food",
+    "Travel",
+    "Education",
+    "Shopping",
+    "Health",
+    "Entertainment"
+  ],
+  "budgets": []
+}

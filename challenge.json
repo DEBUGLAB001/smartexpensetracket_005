@@ -1,0 +1,9 @@
+{
+  "name": "Smart Expense Tracker API Debug Challenge",
+  "runtime_config": {
+    "runtime_type": "node-express"
+  },
+  "start_command": "node server.js",
+  "test_command": "npm test",
+  "description": "Production-style Express backend with intentional debugging bugs."
+}
