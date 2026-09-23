@@ -4,8 +4,6 @@ const datastore = require('../models/datastore');
 const { JWT_SECRET, JWT_EXPIRES_IN } = require('../utils/constants');
 
 const registerUser = async (name, email, password) => {
-  // INTENTIONAL BUG 5: Email duplicate validation is case-sensitive!
-  // It should be comparing with email.toLowerCase()
   const users = await datastore.find('users');
   const existingUser = users.find(u => u.email === email);
   
@@ -20,7 +18,7 @@ const registerUser = async (name, email, password) => {
   
   const newUser = await datastore.insert('users', {
     name,
-    email, // Should probably save as lowercase, but we leave it as is to allow the bug
+    email,
     passwordHash
   });
   

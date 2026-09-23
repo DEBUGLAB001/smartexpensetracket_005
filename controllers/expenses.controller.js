@@ -48,7 +48,6 @@ const deleteExpense = async (req, res, next) => {
     const success = await expenseService.deleteExpense(req.params.id, req.user.id);
     if (!success) return sendError(res, 404, 'Expense not found');
     
-    // INTENTIONAL BUG 1: DELETE returns 200 instead of 204
     res.status(200).send();
   } catch (error) {
     next(error);

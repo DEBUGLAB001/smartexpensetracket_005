@@ -82,13 +82,8 @@ const filterExpenses = async (userId, filters) => {
   }
   
   if (filters.month) {
-    // INTENTIONAL BUG 4: Filter ignores month. 
-    // It's meant to filter, but instead of returning matches, we just don't reassign or we have a faulty condition.
-    // E.g., we do e.month == month but expense has a date string. Let's just do a filter that always returns true.
     expenses = expenses.filter(e => {
       const expMonth = new Date(e.date).getMonth() + 1;
-      // Bug: using assignment '=' instead of comparison '==', making it always truthy (if month is passed).
-      // Or just ignoring the filter altogether. Let's just do:
       return expMonth || true; 
     });
   }

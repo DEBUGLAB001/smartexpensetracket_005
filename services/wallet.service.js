@@ -32,10 +32,6 @@ const updateWallet = async (id, userId, updates) => {
     throw error;
   }
   
-  // INTENTIONAL BUG 3: Authorization flaw
-  // We check if wallet exists, but we DO NOT verify if wallet.userId === userId here!
-  // A user can pass any wallet id and update it.
-  
   return await datastore.update('wallets', id, updates);
 };
 

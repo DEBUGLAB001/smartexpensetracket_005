@@ -18,38 +18,37 @@ class JsonReporter {
           const execTime = testResult.duration || 0;
           totalExecutionTime += execTime;
           
-          if (testResult.status === 'failed') {
-            failed++;
-            output[testResult.title] = {
-              "Status": "failed",
-              "Execution time": `${execTime}ms`
-            };
-          } else if (testResult.status === 'passed') {
+          if (testResult.status === 'passed') {
             passed++;
-            // The prompt didn't explicitly include passed bugs in the example dictionary, 
-            // but we can include them or just ignore. The example only showed failed ones.
+          } else if (testResult.status === 'failed') {
+            failed++;
           }
+
+          output[testResult.title] = {
+            "Status": testResult.status,
+            "Execution time": `${execTime}ms`
+          };
         }
       });
     });
 
-    // If there are no tests specifically named "Bug ...", we might just want to report failed tests.
-    // Let's also handle normal failed tests in case we want to catch all of them.
     if (totalBugs === 0) {
       results.testResults.forEach(testSuiteResult => {
         testSuiteResult.testResults.forEach(testResult => {
-          if (testResult.status === 'failed') {
-            failed++;
-            const execTime = testResult.duration || 0;
-            totalExecutionTime += execTime;
-            output[testResult.title] = {
-              "Status": "failed",
-              "Execution time": `${execTime}ms`
-            };
-          } else if (testResult.status === 'passed') {
-            passed++;
-          }
           totalBugs++;
+          const execTime = testResult.duration || 0;
+          totalExecutionTime += execTime;
+
+          if (testResult.status === 'passed') {
+            passed++;
+          } else if (testResult.status === 'failed') {
+            failed++;
+          }
+
+          output[testResult.title] = {
+            "Status": testResult.status,
+            "Execution time": `${execTime}ms`
+          };
         });
       });
     }

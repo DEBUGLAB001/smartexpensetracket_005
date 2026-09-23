@@ -29,8 +29,6 @@ const getBudgetWithStatus = async (userId, budgetId) => {
     )
     .reduce((sum, e) => sum + Number(e.amount), 0);
     
-  // INTENTIONAL BUG 2: Budget remaining calculation incorrect
-  // Should be: budget.monthlyLimit - spentAmount
   const remaining = budget.monthlyLimit + spentAmount; 
   
   return {
